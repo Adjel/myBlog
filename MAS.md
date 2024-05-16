@@ -57,7 +57,7 @@ Pages and Components:
             - [x] CommentItem
               - [x] DeleteCommentButton
         - [x] AddCommentForm
-  - [x] AddArticle
+  - [x] CreateArticle
   - [x] 404
   - [x] Footer
 
@@ -68,9 +68,8 @@ Pages:
 - [x] Register
 - [x] Home
 - [x] Article
-- [x] AddArticle
+- [x] CreateArticle
 - [x] 404
-- [x] Footer
 
 Components:
 
@@ -89,6 +88,7 @@ Components:
 - [x] CommentItem
 - [x] DeleteCommentButton
 - [x] AddCommentForm
+- [x] Footer
 
 Providers:
 
@@ -132,8 +132,8 @@ Etape:
 - [v] projet
 - [v] projet Git
 - [v] Firebase auth puis article/coms
-- [x] dépendances (toastify/firebase/styled-comp)
-- [x] créer dossier/fichiers
+- [v] dépendances (toastify/firebase/styled-comp)
+- [v] créer dossier/fichiers
 - [x] firebase et env.
 - [x] créer router
 - [x] providers
