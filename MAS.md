@@ -134,9 +134,9 @@ Etape:
 - [v] Firebase auth puis article/coms
 - [v] dépendances (toastify/firebase/styled-comp)
 - [v] créer dossier/fichiers
-- [x] firebase et env.
+- [v] firebase et env.
+- [v] providers
 - [x] créer router
-- [x] providers
 - [x] Constants
 - [x] register
 - [x] login
