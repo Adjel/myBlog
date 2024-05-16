@@ -1,3 +1,4 @@
+"use client";
 import Article from "@/pages/Article/Article";
 import UserProvider from "./UserProvider";
 import ArticlesProvider from "./ArticleProvider";
