@@ -140,7 +140,7 @@ Etape:
 - [v] Constants
 - [v] register
 - [v] LogForm
-- [x] login
+- [v] login
 - [x] header
 - [x] menu
 - [x] disconnect
@@ -164,3 +164,8 @@ Etape:
   - [x] supprimer un commentaire
 
 - [x] modifier un commentaire \*\*
+
+dependances:
+react icon
+firebase styled comp
+toastify
