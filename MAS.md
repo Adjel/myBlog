@@ -129,9 +129,9 @@ Commentaire:
 
 Etape:
 
-- [x] projet
-- [x] projet Git
-- [x] Firebase auth puis article/coms
+- [v] projet
+- [v] projet Git
+- [v] Firebase auth puis article/coms
 - [x] dépendances (toastify/firebase/styled-comp)
 - [x] créer dossier/fichiers
 - [x] firebase et env.
