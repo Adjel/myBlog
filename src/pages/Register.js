@@ -8,7 +8,8 @@ export default function Register() {
   return (
     <LogForm
       logHandler={handleRegister}
-      redirection="Login"
+      hrefDescription="Déjà membre ? Se connecter ici"
+      href="Login"
       loginOrRegister="Register"
     />
   );

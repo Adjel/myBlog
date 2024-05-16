@@ -7,7 +7,7 @@ import { UserContext } from "@/Providers/UserProvider";
 import Link from "next/link";
 import { toast } from "react-toastify";
 
-function LogForm({ logHandler, loginOrRegister, redirection }) {
+function LogForm({ logHandler, hrefDescription, loginOrRegister, href }) {
   const [crediential, setCredential] = useState({
     email: "",
     password: "",
@@ -19,7 +19,7 @@ function LogForm({ logHandler, loginOrRegister, redirection }) {
 
   useEffect(() => {
     if (user) route.push("Home");
-  });
+  }, [user]);
 
   function handleCredentialChange(event) {
     const { name, value } = event.target;
@@ -86,11 +86,7 @@ function LogForm({ logHandler, loginOrRegister, redirection }) {
           </Button>
         </Form>
       </FormWrapper>
-      <FormLink href={`${redirection}`}>
-        {loginOrRegister === "Register"
-          ? "Pas encore de compte ? Créez un compte"
-          : "Déjà membre ? Se connecter ici"}
-      </FormLink>
+      <FormLink href={href}>{hrefDescription}</FormLink>
     </SectionWrapper>
   );
 }

@@ -1,3 +1,4 @@
+"use client";
 // page to the whole app into a provider context
 import Providers from "@/Providers/Providers";
 import React from "react";

@@ -1,14 +1,12 @@
 "use client";
 import Providers from "@/Providers/Providers";
-import Login from "@/pages/Login";
-import { ToastContainer } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Page() {
-  return (
-    <>
-      <Providers>
-        <Login />
-      </Providers>
-    </>
-  );
+  const router = useRouter();
+  useEffect(() => {
+    router.push("Login");
+  }, []);
+  return <Providers />;
 }
