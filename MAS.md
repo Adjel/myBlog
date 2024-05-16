@@ -136,13 +136,14 @@ Etape:
 - [v] créer dossier/fichiers
 - [v] firebase et env.
 - [v] providers
-- [x] créer router
+- [v] créer router
 - [x] Constants
 - [x] register
 - [x] login
-- [x] disconnect
 - [x] header
 - [x] menu
+- [x] disconnect
+- [x] home
 - [x] articleList
 - [x] articleItem
   - [x] fake
