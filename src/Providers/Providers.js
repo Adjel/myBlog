@@ -1,4 +1,4 @@
-import Article from "@/pages/Article/Article";
+"use client";
 import UserProvider from "./UserProvider";
 import ArticlesProvider from "./ArticleProvider";
 import CommentsProvider from "./CommentsProvider";

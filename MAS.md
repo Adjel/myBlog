@@ -137,8 +137,9 @@ Etape:
 - [v] firebase et env.
 - [v] providers
 - [v] créer router
-- [x] Constants
+- [v] Constants
 - [x] register
+- [x] LogForm
 - [x] login
 - [x] header
 - [x] menu
