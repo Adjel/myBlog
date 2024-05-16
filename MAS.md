@@ -138,7 +138,7 @@ Etape:
 - [v] providers
 - [v] créer router
 - [v] Constants
-- [x] register
+- [v] register
 - [x] LogForm
 - [x] login
 - [x] header
