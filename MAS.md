@@ -139,7 +139,7 @@ Etape:
 - [v] créer router
 - [v] Constants
 - [v] register
-- [x] LogForm
+- [v] LogForm
 - [x] login
 - [x] header
 - [x] menu

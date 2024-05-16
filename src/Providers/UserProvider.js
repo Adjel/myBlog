@@ -1,4 +1,8 @@
-import { auth, createUserWithEmailAndPassword } from "../Firebase";
+import {
+  auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "../Firebase";
 import { createContext, useState } from "react";
 
 export const UserContext = createContext();
@@ -11,36 +15,52 @@ export default function UserProvider({ children }) {
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed up
-        const user = userCredential.user;
-        console.log(user);
-        setUser(user);
+        setUser(userCredential.user);
         setIsAuth(true);
-        // ...
       })
       .catch((error) => {
         console.log(error);
         if (error.message === "auth/invalid-email") {
-          notify("L'email renseigné est invalide");
+          return notify("L'email renseigné est invalide");
         }
         if (error.message === "auth/missing-password") {
-          notify("Vous devez renseigner un mot de passe");
+          return notify("Vous devez renseigner un mot de passe");
         }
-        if (error.message === "auth/already-use-email") {
-          notify("Cet email est déjà associé à un compte");
+        if (error.message === "auth/email-already-in-use") {
+          return notify("Cet email est déjà associé à un compte");
         }
         if (error.message === "auth/weak-password") {
-          notify(
+          return notify(
             "Votre mote de passe doit se composer au moins d'une majuscule, un caractère spécial, d'une minuscule,  d'un chiffre et d'au moins 8 caractères au total"
           );
         }
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
+        return notify(error.code);
+      });
+  }
+
+  async function handleLogin({ email, password }, notify) {
+    await signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        setUser(userCredential.user);
+        setIsAuth(true);
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.code === "auth/mssing-email") {
+          return notify("Vous devez renseigner email");
+        }
+        if (error.code === "auth/missing-password") {
+          return notify("Vous devez renseigner un mot de passe");
+        }
+        if (error.code === "auth/invalid-credential") {
+          return notify("L'email ou le mot de passe est invalide");
+        }
+        return notify(error.code);
       });
   }
 
   return (
-    <UserContext.Provider value={{ user, isAuth, handleRegister }}>
+    <UserContext.Provider value={{ user, isAuth, handleRegister, handleLogin }}>
       {children}
     </UserContext.Provider>
   );

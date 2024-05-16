@@ -1,7 +1,5 @@
-"use client";
 import { useContext } from "react";
 import { UserContext } from "@/Providers/UserProvider";
-
 import LogForm from "@/components/LogForm";
 
 export default function Register() {
@@ -10,7 +8,8 @@ export default function Register() {
   return (
     <LogForm
       logHandler={handleRegister}
-      redirection="Home"
+      hrefDescription="Déjà membre ? Se connecter ici"
+      href="Login"
       loginOrRegister="Register"
     />
   );

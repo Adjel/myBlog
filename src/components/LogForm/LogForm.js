@@ -4,9 +4,10 @@ import { useEffect, useState, useContext } from "react";
 import { COLORS } from "@/Constants";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/Providers/UserProvider";
-import { ToastContainer, toast } from "react-toastify";
+import Link from "next/link";
+import { toast } from "react-toastify";
 
-function LogForm({ logHandler, loginOrRegister, redirection }) {
+function LogForm({ logHandler, hrefDescription, loginOrRegister, href }) {
   const [crediential, setCredential] = useState({
     email: "",
     password: "",
@@ -17,8 +18,8 @@ function LogForm({ logHandler, loginOrRegister, redirection }) {
   const notify = (message) => toast(message);
 
   useEffect(() => {
-    if (user) route.push(redirection);
-  });
+    if (user) route.push("Home");
+  }, [user]);
 
   function handleCredentialChange(event) {
     const { name, value } = event.target;
@@ -28,12 +29,12 @@ function LogForm({ logHandler, loginOrRegister, redirection }) {
     });
   }
 
-  async function handleOnSubmit(event) {
-    event.preventDefault();
+  async function handleRegisterWithErrors() {
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-    if (crediential.email === "")
+    if (crediential.email === "") {
       return notify("Vous devez renseigner un email");
+    }
     if (crediential.password === "")
       return notify("Vous devez renseigner un mot de passe");
     if (emailRegex.test(crediential.email))
@@ -43,6 +44,23 @@ function LogForm({ logHandler, loginOrRegister, redirection }) {
         "Votre mote de passe doit se composer au moins d'une majuscule, un caractère spécial, d'une minuscule,  d'un chiffre et d'au moins 8 caractères au total"
       );
     await logHandler(crediential, notify);
+  }
+
+  async function handleLoginWithErrors() {
+    if (crediential.email === "")
+      return notify("Vous devez renseigner un email");
+    if (crediential.password === "")
+      return notify("Vous devez renseigner un mot de passe");
+    await logHandler(crediential, notify);
+  }
+
+  async function handleOnSubmit(event) {
+    event.preventDefault();
+    if (loginOrRegister === "register") {
+      await handleRegisterWithErrors();
+    } else {
+      await handleLoginWithErrors();
+    }
   }
 
   return (
@@ -68,6 +86,7 @@ function LogForm({ logHandler, loginOrRegister, redirection }) {
           </Button>
         </Form>
       </FormWrapper>
+      <FormLink href={href}>{hrefDescription}</FormLink>
     </SectionWrapper>
   );
 }
@@ -78,8 +97,9 @@ const SectionWrapper = styled.section`
   justify-content: center;
   align-items: center;
   background-color: white;
-  height: 100%;
   width: 100%;
+  height: 100vh;
+  gap: ${16 / 16}rem;
 `;
 
 const FormWrapper = styled.div`
@@ -87,11 +107,12 @@ const FormWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: calc(8 / 16 * 1rem);
-  height: 50%;
-  width: 50%;
-  border-radius: calc(4 / 16 * 1rem);
+  gap: ${8 / 16}rem;
+  min-width: 40%;
+  min-height: 60%;
+  border-radius: ${4 / 16}rem;
   border: 2px solid ${COLORS.Gray.lightGray};
+  color: black;
 `;
 
 const Form = styled.form`
@@ -99,13 +120,32 @@ const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: ${COLORS.Gray.lightGray};
+  gap: ${8 / 16}rem;
+  padding: ${8 / 16}rem;
+  min-height: 80%;
 `;
 
 const Button = styled.button`
-  color: ${COLORS.Gray.lightGray};
-  background: none;
-  border: none;
+  background: ${COLORS.Gray.buttonDarkGray};
+  border: 0.5px solid ${COLORS.primary};
+  color: ${COLORS.Gray.buttonLightGray};
+  width: ${64 / 16}rem;
+  height: ${28 / 16}rem;
+
+  &:hover {
+    background: ${COLORS.primary};
+    border: 0.5px solid ${COLORS.primary};
+    color: black;
+  }
+`;
+
+const FormLink = styled(Link)`
+  text-decoration: none;
+  color: ${COLORS.primary};
+
+  &:hover {
+    color: ${COLORS.Gray.buttonDarkGray};
+  }
 `;
 
 export default LogForm;

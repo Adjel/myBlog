@@ -1,10 +1,12 @@
-import Register from "@/pages/Register";
+"use client";
 import Providers from "@/Providers/Providers";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Page() {
-  return (
-    <Providers>
-      <Register />
-    </Providers>
-  );
+  const router = useRouter();
+  useEffect(() => {
+    router.push("Login");
+  }, []);
+  return <Providers />;
 }
