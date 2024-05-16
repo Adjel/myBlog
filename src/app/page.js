@@ -1,10 +1,14 @@
-import Register from "@/pages/Register";
+"use client";
 import Providers from "@/Providers/Providers";
+import Login from "@/pages/Login";
+import { ToastContainer } from "react-toastify";
 
 export default function Page() {
   return (
-    <Providers>
-      <Register />
-    </Providers>
+    <>
+      <Providers>
+        <Login />
+      </Providers>
+    </>
   );
 }
