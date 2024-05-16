@@ -105,21 +105,3 @@ a {
     color-scheme: dark;
   }
 }
-
-*{
-  
-  --tabletMin: 550;
-  --laptopMin: 1500;
-  --desktopMin: 1500;
-
-  --queries-tabletToUp: var(var(--tabletMin/16)rem);
-
-  --color-lightGray: hsl(0 0 90);
-  --color-buttonLightGray: hsl(0 0 96);
-  --color-buttonDarkGray:hsl(0 0 40);
-  --color-mediumGray: hsl(0 0 65);
-  --color-darkGray: hsl(0 0 60);
-  --color-font-darkGray: hsl(0 0 40);
-  --color-primary: hsl(37 45 54);
-  
-}
