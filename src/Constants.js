@@ -12,6 +12,7 @@ export const QUERIES = {
 
 export const COLORS = {
   Gray: {
+    articleBackground: "hsl(0 0 98)",
     lightGray: "hsl(0 0 90)",
     buttonLightGray: "hsl(0 0 96)",
     buttonDarkGray: "hsl(0 0 40)",
@@ -42,8 +43,8 @@ export const FONTFAMILY = {
 export const FONTSIZE = {
   h1: `${20 / 16}rem`,
   h2: `${18 / 16}rem`,
-  h3: `${26 / 16}rem`,
-  parag: `${16 / 16}rem`,
+  h3: `${16 / 16}rem`,
+  parag: `${14 / 16}rem`,
   buttonMenu: `${13 / 16}rem`,
   button: `${11 / 16}rem`,
 
