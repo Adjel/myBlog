@@ -1,8 +1,7 @@
 import { ArticlesContext } from "@/Providers/ArticleProvider";
-import { notify } from "@/app/page";
 import ArticleItem from "@/components/ArticleItem";
+import Footer from "@/components/Footer";
 import HeaderComponent from "@/components/Header";
-import { Timestamp } from "firebase/firestore";
 import { useContext, useEffect } from "react";
 import styled from "styled-components";
 
@@ -28,6 +27,7 @@ export default function Home() {
           />
         ))}
       </ArticleGrid>
+      <Footer />
     </Wrapper>
   );
 }

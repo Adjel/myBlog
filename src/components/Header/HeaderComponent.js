@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import LogInButton from "../LogInButton";
-import LogLink from "../LogLink";
+import HomeButton from "../HomeButton";
 import { COLORS } from "@/Constants";
 
 function HeaderComponent() {
   return (
     <Wrapper>
-      <LogLink />
+      <HomeButton />
       <LogInButton />
     </Wrapper>
   );

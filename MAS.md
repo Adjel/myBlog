@@ -159,7 +159,7 @@ Etape:
   - [v] fetch
 - [v] Supprimer un article
 - [v] Modifier un article
-- [x] author
+- [v] author
 - [x] Footer
 - [x] CommentList
   - [x] ajouter un commentaire (form)
