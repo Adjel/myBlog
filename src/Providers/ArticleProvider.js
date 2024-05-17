@@ -20,8 +20,6 @@ export default function ArticlesProvider({ children }) {
           id: doc.id,
           ...doc.data(),
         });
-
-        console.log(articles);
         setArticles(articles);
       });
     });
@@ -33,22 +31,22 @@ export default function ArticlesProvider({ children }) {
 
   async function handleNewArticle({ title, content, subtitle }) {
     if (user) {
-      const ref = collection(db, "users", user.uid, "articles");
-      await addDoc(ref, {
-        title: title,
-        subtitle: subtitle,
-        content: content,
-        createdAt: serverTimestamp(),
-        id: user.uid,
-      })
-        .then(() => {
+      try {
+        const ref = collection(db, "articles");
+        await addDoc(ref, {
+          title: title,
+          subtitle: subtitle,
+          content: content,
+          createdAt: serverTimestamp(),
+          id: user.uid,
+        }).then(() => {
           notify("Bravo, Ton article a été créé !");
-        })
-        .then((error) => {
-          notify(
-            `Désolé, l'erreur "${error}" s'est produite, votre article n'a pas pu être crée `
-          );
         });
+      } catch (error) {
+        notify(
+          `Désolé, l'erreur "${error}" s'est produite, votre article n'a pas pu être crée `
+        );
+      }
     } else {
       notify("Désolé, tu dois être connecté pour écrire un article");
     }
