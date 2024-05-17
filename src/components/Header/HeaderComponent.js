@@ -4,7 +4,7 @@ import LogInButton from "../LogInButton";
 import LogLink from "../LogLink";
 import { COLORS } from "@/Constants";
 
-function Header() {
+function HeaderComponent() {
   return (
     <Wrapper>
       <LogLink />
@@ -22,4 +22,4 @@ const Wrapper = styled.header`
   border-bottom: 1px solid ${COLORS.Gray.lightGray};
 `;
 
-export default Header;
+export default HeaderComponent;

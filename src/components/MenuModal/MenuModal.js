@@ -21,6 +21,14 @@ function MenuModal({ setIsShown }) {
     router.push("CreateArticle");
   };
 
+  function handleModifyArticle(event) {
+    event.preventDefault();
+    router.push({
+      pathname: "UpdateArticle",
+      query: { docId: currentArticle.id },
+    });
+  }
+
   async function onDeleteArticle(event) {
     event.preventDefault();
     if (await handleDeleteArticle()) router.push("Home");
@@ -37,7 +45,9 @@ function MenuModal({ setIsShown }) {
             <MenuButton onClick={(e) => HandleAddArtcicleClick(e)}>
               ajouter un article
             </MenuButton>
-            <MenuButton>MODIFIER l'article</MenuButton>
+            <MenuButton onClick={(event) => handleModifyArticle(event)}>
+              MODIFIER l'article
+            </MenuButton>
             <MenuButton onClick={(event) => onDeleteArticle(event)}>
               SUPPRIMER l'article
             </MenuButton>
