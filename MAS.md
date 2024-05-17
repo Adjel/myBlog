@@ -160,7 +160,7 @@ Etape:
 - [v] Supprimer un article
 - [v] Modifier un article
 - [v] author
-- [x] Footer
+- [v] Footer
 - [x] CommentList
   - [x] ajouter un commentaire (form)
 - [x] commentItem

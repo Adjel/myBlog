@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { IoClose } from "react-icons/io5";
 import { COLORS, FONTFAMILY, FONTSIZE, FONTWEIGHT } from "@/Constants";
@@ -47,7 +47,7 @@ function MenuModal({ setIsShown }) {
               ajouter un article
             </MenuButton>
           )}
-          {user && currentArticle && (
+          {user?.uid === currentArticle?.userId && (
             <>
               <MenuButton onClick={(event) => handleModifyArticle(event)}>
                 MODIFIER l'article

@@ -85,6 +85,11 @@ export default function ArticlesProvider({ children }) {
 
   async function handleDeleteArticle() {
     try {
+      if (currentArticle.userId !== user.uid) {
+        return notify(
+          "Vous ne pouvez pas supprimer un article dont vous n'êtes pas l'auteur"
+        );
+      }
       if (currentArticle) {
         await deleteDoc(doc(db, "articles", currentArticle.id));
         setCurrentArticle();
@@ -99,6 +104,11 @@ export default function ArticlesProvider({ children }) {
 
   async function handleUpdateArticle({ title, subtitle, content, id }) {
     try {
+      if (currentArticle.userId !== user.uid) {
+        return notify(
+          "Vous ne pouvez pas modifier un article dont vous n'êtes pas l'auteur"
+        );
+      }
       if (id === currentArticle.id) {
         const docRef = doc(db, "articles", id);
         await updateDoc(docRef, {
