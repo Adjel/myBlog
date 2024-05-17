@@ -1,12 +1,18 @@
 import { ArticlesContext } from "@/Providers/ArticleProvider";
+import { notify } from "@/app/page";
 import ArticleItem from "@/components/ArticleItem";
 import Header from "@/components/Header";
 import { Timestamp } from "firebase/firestore";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
 
 export default function Home() {
   const { articles } = useContext(ArticlesContext);
+
+  useEffect(() => {
+    // this must be never happen
+    if (articles.length === 0) notify("Il n'a pas d'articles à lire");
+  }, [articles]);
 
   return (
     <Wrapper>
