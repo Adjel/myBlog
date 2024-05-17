@@ -1,6 +1,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserProvider";
-import { addDoc, collection, db, onSnapshot, getDoc, doc } from "@/Firebase";
+import {
+  addDoc,
+  collection,
+  db,
+  onSnapshot,
+  getDoc,
+  doc,
+  deleteDoc,
+} from "@/Firebase";
 import { serverTimestamp } from "firebase/firestore";
 import { notify } from "@/app/page";
 
@@ -61,7 +69,10 @@ export default function ArticlesProvider({ children }) {
     const ref = doc(db, "articles", id);
     const docSnap = await getDoc(ref);
     if (docSnap.exists()) {
-      return setCurrentArticle({ ...docSnap.data() });
+      return setCurrentArticle({
+        id: docSnap.id,
+        ...docSnap.data(),
+      });
     } else {
       return notify("Ce document n'existe pas");
     }
@@ -69,6 +80,20 @@ export default function ArticlesProvider({ children }) {
 
   function resetCurrentArticle() {
     setCurrentArticle();
+  }
+
+  async function handleDeleteArticle() {
+    try {
+      if (currentArticle) {
+        await deleteDoc(doc(db, "articles", currentArticle.id));
+        setCurrentArticle();
+        notify("L'article à bien été supprimé");
+        return true;
+      }
+    } catch (e) {
+      notify(`L'article n'a pas pu être supprimé, ${e} est survenu`);
+      return false;
+    }
   }
 
   return (
@@ -79,6 +104,7 @@ export default function ArticlesProvider({ children }) {
         fetchArticle,
         currentArticle,
         resetCurrentArticle,
+        handleDeleteArticle,
       }}
     >
       {children}

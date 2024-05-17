@@ -6,32 +6,35 @@ import { useContext, useEffect, useState } from "react";
 import { ArticlesContext } from "@/Providers/ArticleProvider";
 import AuthorComponent from "@/components/AuthorComponent";
 import CommentList from "@/components/CommentList";
+import Header from "@/components/Header";
 
 export default function Article() {
   const router = useRouter();
   const { docId } = router.query;
 
-  const { fetchArticle, currentArticle, resetCurrentArticle } =
-    useContext(ArticlesContext);
+  const { fetchArticle, currentArticle } = useContext(ArticlesContext);
 
   useEffect(() => {
     fetchArticle(docId);
   }, []);
 
   return (
-    <PageWrapper>
-      <article>
-        <Header>
-          <Title>{currentArticle?.title}</Title>
-          <Subtitle>{currentArticle?.subtitle}</Subtitle>
-        </Header>
-        <ContentParag>{currentArticle?.content}</ContentParag>
-      </article>
-      <section>
-        <AuthorComponent />
-        <CommentList />
-      </section>
-    </PageWrapper>
+    <>
+      <Header />
+      <PageWrapper>
+        <article>
+          <ArticleHeader>
+            <Title>{currentArticle?.title}</Title>
+            <Subtitle>{currentArticle?.subtitle}</Subtitle>
+          </ArticleHeader>
+          <ContentParag>{currentArticle?.content}</ContentParag>
+        </article>
+        <section>
+          <AuthorComponent />
+          <CommentList />
+        </section>
+      </PageWrapper>
+    </>
   );
 }
 
@@ -42,7 +45,7 @@ const PageWrapper = styled.section`
   padding: ${16 / 8}rem;
 `;
 
-const Header = styled.header`
+const ArticleHeader = styled.header`
   display: flex;
   flex-direction: column;
   justify-content: center;
