@@ -1,9 +1,11 @@
+import { notify } from "@/app/page";
 import {
   auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "../Firebase";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const UserContext = createContext();
 
@@ -59,8 +61,21 @@ export default function UserProvider({ children }) {
       });
   }
 
+  async function handleDisconnect() {
+    signOut(auth)
+      .then(() => {
+        setUser();
+        return notify("Vous avez bien été déconnecté");
+      })
+      .catch((error) => {
+        return notify(error);
+      });
+  }
+
   return (
-    <UserContext.Provider value={{ user, isAuth, handleRegister, handleLogin }}>
+    <UserContext.Provider
+      value={{ user, isAuth, handleRegister, handleLogin, handleDisconnect }}
+    >
       {children}
     </UserContext.Provider>
   );
