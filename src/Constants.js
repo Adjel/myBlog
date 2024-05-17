@@ -48,6 +48,7 @@ export const FONTSIZE = {
   buttonMenu: `${13 / 16}rem`,
   button: `${11 / 16}rem`,
   author: `${20 / 16}rem`,
+  footer: `${14 / 16}rem`,
 
   comments: {
     user: `${14.5 / 16}rem`,

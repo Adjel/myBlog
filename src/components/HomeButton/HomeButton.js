@@ -3,7 +3,7 @@ import Link from "next/link";
 import { IoCarSportSharp } from "react-icons/io5";
 import styled from "styled-components";
 
-function LogLink() {
+function HomeButton() {
   return (
     <HomeLinkIcon href="Home">
       <Icon />
@@ -23,4 +23,4 @@ const HomeLinkIcon = styled(Link)`
   }
 `;
 
-export default LogLink;
+export default HomeButton;
