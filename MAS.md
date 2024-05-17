@@ -144,7 +144,7 @@ Etape:
 - [v] header
 - [v] menu
 - [v] disconnect
-- [x] home
+- [v] home
 - [x] articleList
 - [x] articleItem
   - [x] fake
