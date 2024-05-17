@@ -29,6 +29,8 @@ export default function CreatArticle() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    if (!user)
+      return notify("Désolé, tu dois être connecté pour écrire un article");
     await handleNewArticle(article);
   }
 

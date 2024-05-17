@@ -12,36 +12,34 @@ export default function ArticlesProvider({ children }) {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    if (user) {
-      const ref = collection(db, "users", user.uid, "articles");
-      const unsubscribe = onSnapshot(ref, (querySnapshot) => {
-        const articles = [];
-        querySnapshot.forEach((doc) => {
-          articles.push({
-            id: doc.id,
-            ...doc.data(),
-          });
-
-          console.log(articles);
-          setArticles(articles);
+    const ref = collection(db, "articles");
+    const unsubscribe = onSnapshot(ref, (querySnapshot) => {
+      const articles = [];
+      querySnapshot.forEach((doc) => {
+        articles.push({
+          id: doc.id,
+          ...doc.data(),
         });
-      });
 
-      return () => {
-        unsubscribe();
-      };
-    }
-  }, [user]);
+        console.log(articles);
+        setArticles(articles);
+      });
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   async function handleNewArticle({ title, content, subtitle }) {
     if (user) {
       const ref = collection(db, "users", user.uid, "articles");
-      const articleRef = await addDoc(ref, {
+      await addDoc(ref, {
         title: title,
         subtitle: subtitle,
         content: content,
         createdAt: serverTimestamp(),
-        userId: user.uid,
+        id: user.uid,
       })
         .then(() => {
           notify("Bravo, Ton article a été créé !");
@@ -52,7 +50,7 @@ export default function ArticlesProvider({ children }) {
           );
         });
     } else {
-      notify("Désolé, vous devez être connecté pour écrire un article");
+      notify("Désolé, tu dois être connecté pour écrire un article");
     }
   }
 
