@@ -17,6 +17,7 @@ export const COLORS = {
     buttonDarkGray: "hsl(0 0 40)",
     mediumGray: "hsl(0 0 65)",
     darkGray: "hsl(0 0 60)",
+    transparentBackground: "hsla(0, 0%, 40%, 70%)",
   },
   font: {
     darkGray: "hsl(0 0 40)",
