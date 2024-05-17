@@ -142,8 +142,8 @@ Etape:
 - [v] LogForm
 - [v] login
 - [v] header
-- [x] menu
-- [x] disconnect
+- [v] menu
+- [v] disconnect
 - [x] home
 - [x] articleList
 - [x] articleItem
