@@ -145,11 +145,14 @@ Etape:
 - [v] menu
 - [v] disconnect
 - [v] home
-- [x] articleList
-- [x] articleItem
-  - [x] fake
-  - [x] fetch
+- [v] articleList
+  - [v] fake
 - [x] Ajouter un article (AddArticleForm in AddArticle)
+  - [v] fake
+  - [x] fetch
+- [v] articleList
+  - [x] fetch
+- [x] articleItem
 - [x] Article(Page)
   - [x] fake
   - [x] fetch

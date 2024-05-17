@@ -14,6 +14,11 @@ function MenuModal({ setIsShown }) {
     await handleDisconnect();
   }
 
+  const HandleAddArtcicleClick = (e) => {
+    e.preventDefault();
+    router.push("CreateArticle");
+  };
+
   return (
     <PageBackground>
       <Modal>
@@ -22,7 +27,7 @@ function MenuModal({ setIsShown }) {
         </CloseIconWrapper>
         {user && (
           <ButtonsWrapper>
-            <MenuButton onClick={() => router("CreateArticle")}>
+            <MenuButton onClick={(e) => HandleAddArtcicleClick(e)}>
               ajouter un article
             </MenuButton>
             <MenuButton>MODIFIER l'article</MenuButton>

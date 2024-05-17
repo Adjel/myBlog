@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserProvider";
-import { collection, db, onSnapshot } from "@/Firebase";
+import { addDoc, collection, db, onSnapshot } from "@/Firebase";
+import { Timestamp, serverTimestamp } from "firebase/firestore";
 
 export const ArticlesContext = createContext();
 
@@ -31,8 +32,18 @@ export default function ArticlesProvider({ children }) {
     }
   }, [user]);
 
+  async function handleNewArticle({ title, content }) {
+    const ref = collection(db, "users", user.uid, "articles");
+    const articleRef = await addDoc(ref, {
+      title: title,
+      content: content,
+      createdAt: serverTimestamp(),
+    });
+    console.log("handleNewArticle in ArticleProvider", articleRef.id);
+  }
+
   return (
-    <ArticlesContext.Provider value={{ articles }}>
+    <ArticlesContext.Provider value={{ articles, handleNewArticle }}>
       {children}
     </ArticlesContext.Provider>
   );
