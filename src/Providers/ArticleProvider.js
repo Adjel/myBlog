@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserProvider";
-import { addDoc, collection, db, onSnapshot } from "@/Firebase";
+import { addDoc, collection, db, onSnapshot, getDoc, doc } from "@/Firebase";
 import { serverTimestamp } from "firebase/firestore";
 import { notify } from "@/app/page";
 
@@ -8,6 +8,7 @@ export const ArticlesContext = createContext();
 
 export default function ArticlesProvider({ children }) {
   const [articles, setArticles] = useState([]);
+  const [currentArticle, setCurrentArticle] = useState();
 
   const { user } = useContext(UserContext);
 
@@ -38,7 +39,7 @@ export default function ArticlesProvider({ children }) {
           subtitle: subtitle,
           content: content,
           createdAt: serverTimestamp(),
-          id: user.uid,
+          userId: user.uid,
         }).then(() => {
           notify("Bravo, Ton article a été créé !");
         });
@@ -52,8 +53,30 @@ export default function ArticlesProvider({ children }) {
     }
   }
 
+  async function fetchArticle(id) {
+    const ref = doc(db, "articles", id);
+    const docSnap = await getDoc(ref);
+    if (docSnap.exists()) {
+      return setCurrentArticle({ ...docSnap.data() });
+    } else {
+      return notify("Ce document n'existe pas");
+    }
+  }
+
+  function resetCurrentArticle() {
+    setCurrentArticle();
+  }
+
   return (
-    <ArticlesContext.Provider value={{ articles, handleNewArticle }}>
+    <ArticlesContext.Provider
+      value={{
+        articles,
+        handleNewArticle,
+        fetchArticle,
+        currentArticle,
+        resetCurrentArticle,
+      }}
+    >
       {children}
     </ArticlesContext.Provider>
   );

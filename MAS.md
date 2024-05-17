@@ -153,7 +153,7 @@ Etape:
 - [v] backHomeButton
 - [v] articleList
   - [v] fetch
-- [x] articleItem
+- [v] articleItem
 - [x] Article(Page)
   - [x] fake
   - [x] fetch

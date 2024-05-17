@@ -30,8 +30,8 @@ function MenuModal({ setIsShown }) {
             <MenuButton onClick={(e) => HandleAddArtcicleClick(e)}>
               ajouter un article
             </MenuButton>
-            <MenuButton>MODIFIER l'article</MenuButton>
-            <MenuButton>SUPPRIMER l'article</MenuButton>
+            <MenuButton>MODIFIER l`&aposarticle</MenuButton>
+            <MenuButton>SUPPRIMER l`&aposarticle</MenuButton>
           </ButtonsWrapper>
         )}
         <ButtonsWrapper style={{ flex: 2 }}>
