@@ -5,6 +5,7 @@ import { COLORS, FONTFAMILY, FONTSIZE, FONTWEIGHT } from "@/Constants";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/Providers/UserProvider";
 import { ArticlesContext } from "@/Providers/ArticleProvider";
+import { notify } from "@/app/page";
 
 function MenuModal({ setIsShown }) {
   const { user, handleDisconnect } = useContext(UserContext);
@@ -40,19 +41,23 @@ function MenuModal({ setIsShown }) {
         <CloseIconWrapper>
           <CloseIcon onClick={setIsShown} />
         </CloseIconWrapper>
-        {user && (
-          <ButtonsWrapper>
+        <ButtonsWrapper>
+          {user && (
             <MenuButton onClick={(e) => HandleAddArtcicleClick(e)}>
               ajouter un article
             </MenuButton>
-            <MenuButton onClick={(event) => handleModifyArticle(event)}>
-              MODIFIER l'article
-            </MenuButton>
-            <MenuButton onClick={(event) => onDeleteArticle(event)}>
-              SUPPRIMER l'article
-            </MenuButton>
-          </ButtonsWrapper>
-        )}
+          )}
+          {user && currentArticle && (
+            <>
+              <MenuButton onClick={(event) => handleModifyArticle(event)}>
+                MODIFIER l'article
+              </MenuButton>
+              <MenuButton onClick={(event) => onDeleteArticle(event)}>
+                SUPPRIMER l'article
+              </MenuButton>
+            </>
+          )}
+        </ButtonsWrapper>
         <ButtonsWrapper style={{ flex: 2 }}>
           <MenuButton onClick={() => handleOnDisconnect()}>
             Se déconnecter
