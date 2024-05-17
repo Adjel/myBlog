@@ -18,14 +18,21 @@ export default function Home() {
     <Wrapper>
       <Header />
       <ArticleGrid>
-        {articles.map(({ content, createdAt, title }) => (
-          <div>
+        {articles.map(({ content, createdAt, title, uid }) =>
+          /*
+        (
+          <div key={id}>
             {content}
             {new Date(createdAt).toLocaleDateString()}
             {title}
           </div>
           //<ArticleItem/>
-        ))}
+        )
+        */
+          {
+            console.log(uid);
+          }
+        )}
       </ArticleGrid>
     </Wrapper>
   );

@@ -5,10 +5,12 @@ import { notify } from "@/app/page";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import BackHomeButton from "@/components/BackHomeButton";
 
 export default function CreatArticle() {
   const [article, setArticle] = useState({
     title: "",
+    subtitle: "",
     content: "",
   });
 
@@ -41,10 +43,12 @@ export default function CreatArticle() {
 
   return (
     <Wrapper>
+      <CreateArticleHeader>
+        <BackHomeButton />
+        <HeaderH1>Ecris ton article ici</HeaderH1>
+        <H1centerDiv />
+      </CreateArticleHeader>
       <BackgroundWrapper>
-        <CreateArticleHeader>
-          <HeaderH1>Ecris ton article ici</HeaderH1>
-        </CreateArticleHeader>
         <Form>
           <Label htmlFor="title">ton titre:</Label>
           <Input
@@ -52,6 +56,14 @@ export default function CreatArticle() {
             id="title"
             name="title"
             value={article.title}
+            onChange={(event) => handleOncChange(event)}
+          ></Input>
+          <Label htmlFor="subtitle">ton sous-titre (optionnel):</Label>
+          <Input
+            type="text"
+            id="subtitle"
+            name="subtitle"
+            value={article.subtitle}
             onChange={(event) => handleOncChange(event)}
           ></Input>
           <Label htmlFor="content">ton article:</Label>
@@ -93,12 +105,17 @@ const BackgroundWrapper = styled.div`
 
 const CreateArticleHeader = styled.header`
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
+  width: 100%;
+`;
+
+const H1centerDiv = styled.div`
+  flex: 1;
 `;
 
 const HeaderH1 = styled.h1`
+  flex: 1;
   font-weight: ${FONTWEIGHT.one};
   font-family: ${FONTFAMILY.lato};
   letter-spacing: 0.1rem;
