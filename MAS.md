@@ -154,9 +154,9 @@ Etape:
 - [v] articleList
   - [v] fetch
 - [v] articleItem
-- [x] Article(Page)
-  - [x] fake
-  - [x] fetch
+- [v] Article(Page)
+  - [v] fake
+  - [v] fetch
 - [x] Supprimer un article
 - [x] Modifier un article
 - [x] author

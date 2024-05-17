@@ -9,11 +9,6 @@ import styled from "styled-components";
 export default function Home() {
   const { articles } = useContext(ArticlesContext);
 
-  useEffect(() => {
-    // this must be never happen
-    if (articles.length === 0) notify("Il n'a pas d'articles à lire");
-  }, [articles]);
-
   return (
     <Wrapper>
       <Header />

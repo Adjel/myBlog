@@ -21,6 +21,10 @@ export default function ArticlesProvider({ children }) {
           id: doc.id,
           ...doc.data(),
         });
+
+        if (articles.length === 0)
+          return notify("Il n'a pas d'articles à lire");
+
         setArticles(articles);
       });
     });
