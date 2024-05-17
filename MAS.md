@@ -157,7 +157,7 @@ Etape:
 - [v] Article(Page)
   - [v] fake
   - [v] fetch
-- [x] Supprimer un article
+- [v] Supprimer un article
 - [x] Modifier un article
 - [x] author
 - [x] Footer

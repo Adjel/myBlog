@@ -8,6 +8,7 @@ import {
   getDoc,
   doc,
   deleteDoc,
+  updateDoc,
 } from "@/Firebase";
 import { serverTimestamp } from "firebase/firestore";
 import { notify } from "@/app/page";
@@ -96,6 +97,26 @@ export default function ArticlesProvider({ children }) {
     }
   }
 
+  async function handleUpdateArticle({ title, subtitle, content, id }) {
+    try {
+      if (id === currentArticle.id) {
+        const docRef = doc(db, "articles", id);
+        await updateDoc(docRef, {
+          title,
+          subtitle,
+          content,
+        });
+        return notify("L'article à été modifié avec succès !");
+      } else {
+        return notify(
+          "Impossible de modifier l'article car un problème est survenue"
+        );
+      }
+    } catch (e) {
+      return notify(`Désolé, ${e} est survenue`);
+    }
+  }
+
   return (
     <ArticlesContext.Provider
       value={{
@@ -105,6 +126,7 @@ export default function ArticlesProvider({ children }) {
         currentArticle,
         resetCurrentArticle,
         handleDeleteArticle,
+        handleUpdateArticle,
       }}
     >
       {children}

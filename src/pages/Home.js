@@ -1,7 +1,7 @@
 import { ArticlesContext } from "@/Providers/ArticleProvider";
 import { notify } from "@/app/page";
 import ArticleItem from "@/components/ArticleItem";
-import Header from "@/components/Header";
+import HeaderComponent from "@/components/Header";
 import { Timestamp } from "firebase/firestore";
 import { useContext, useEffect } from "react";
 import styled from "styled-components";
@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <Wrapper>
-      <Header />
+      <HeaderComponent />
       <ArticleGrid>
         {articles.map(({ content, createdAt, title, subtitle, id }) => (
           <ArticleItem

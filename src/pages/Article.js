@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import { ArticlesContext } from "@/Providers/ArticleProvider";
 import AuthorComponent from "@/components/AuthorComponent";
 import CommentList from "@/components/CommentList";
-import Header from "@/components/Header";
+import HeaderComponent from "@/components/Header";
 
 export default function Article() {
   const router = useRouter();
@@ -20,7 +20,7 @@ export default function Article() {
 
   return (
     <>
-      <Header />
+      <HeaderComponent />
       <PageWrapper>
         <article>
           <ArticleHeader>
