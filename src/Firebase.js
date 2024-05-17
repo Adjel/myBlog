@@ -9,6 +9,7 @@ import {
   doc,
   deleteDoc,
   updateDoc,
+  getDoc,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -49,6 +50,7 @@ export {
   doc,
   deleteDoc,
   updateDoc,
+  getDoc,
 };
 
 export default app;

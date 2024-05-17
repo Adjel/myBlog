@@ -10,7 +10,7 @@ function BackHomeButton() {
   return (
     <HomeButton onClick={() => router.push("Home")}>
       <IoIosArrowBack />
-      <Button>Retour à l'acceuil</Button>
+      <Button>Retour à l`&aposacceuil</Button>
     </HomeButton>
   );
 }

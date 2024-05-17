@@ -8,7 +8,10 @@ function ArticleItem({ createdAt, title, subtitle, id }) {
 
   function handleOnReadMore(event) {
     event.preventDefault();
-    router.push("Article/:id");
+    router.push({
+      pathname: "Article",
+      query: { docId: id },
+    });
   }
 
   return (

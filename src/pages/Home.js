@@ -12,7 +12,7 @@ export default function Home() {
   useEffect(() => {
     // this must be never happen
     if (articles.length === 0) notify("Il n'a pas d'articles à lire");
-  }, []);
+  }, [articles]);
 
   return (
     <Wrapper>
@@ -25,6 +25,7 @@ export default function Home() {
             createdAt={new Date(createdAt).toLocaleDateString()}
             title={title}
             subtitle={subtitle}
+            id={id}
           />
         ))}
       </ArticleGrid>

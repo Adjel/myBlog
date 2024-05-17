@@ -41,9 +41,9 @@ export const FONTFAMILY = {
 };
 
 export const FONTSIZE = {
-  h1: `${20 / 16}rem`,
-  h2: `${18 / 16}rem`,
-  h3: `${16 / 16}rem`,
+  h1: `${26 / 16}rem`,
+  h2: `${19 / 16}rem`,
+  h3: `${18 / 16}rem`,
   parag: `${14 / 16}rem`,
   buttonMenu: `${13 / 16}rem`,
   button: `${11 / 16}rem`,
