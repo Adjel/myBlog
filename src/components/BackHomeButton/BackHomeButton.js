@@ -15,7 +15,7 @@ function BackHomeButton() {
   );
 }
 
-const HomeButton = styled.div`
+const HomeButton = styled.aside`
   flex: 1;
   display: flex;
   jsutify-content: start;
