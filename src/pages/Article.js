@@ -29,8 +29,10 @@ export default function Article() {
           </ArticleHeader>
           <ContentParag>{currentArticle?.content}</ContentParag>
         </article>
+        <Divider />
         <section>
           <AuthorComponent />
+          <Divider />
           <CommentList />
         </section>
       </PageWrapper>
@@ -42,6 +44,7 @@ const PageWrapper = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: ${16 / 8}rem;
   padding: ${16 / 8}rem;
 `;
 
@@ -70,4 +73,9 @@ const ContentParag = styled.p`
   font-family: ${FONTFAMILY.lato};
   font-weight: ${FONTWEIGHT.one};
   font-size: ${FONTSIZE.parag};
+`;
+
+const Divider = styled.hr`
+  border-top: 0.5px solid ${COLORS.Gray.lightGray};
+  width: 100%;
 `;

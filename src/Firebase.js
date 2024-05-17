@@ -10,6 +10,9 @@ import {
   deleteDoc,
   updateDoc,
   getDoc,
+  getDocs,
+  where,
+  setDoc,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -51,6 +54,9 @@ export {
   deleteDoc,
   updateDoc,
   getDoc,
+  getDocs,
+  where,
+  setDoc,
 };
 
 export default app;
