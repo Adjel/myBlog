@@ -7,7 +7,11 @@ import { useContext, useEffect } from "react";
 import styled from "styled-components";
 
 export default function Home() {
-  const { articles } = useContext(ArticlesContext);
+  const { articles, resetCurrentArticle } = useContext(ArticlesContext);
+
+  useEffect(() => {
+    resetCurrentArticle();
+  }, []);
 
   return (
     <Wrapper>

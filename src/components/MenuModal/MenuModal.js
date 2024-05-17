@@ -4,9 +4,11 @@ import { IoClose } from "react-icons/io5";
 import { COLORS, FONTFAMILY, FONTSIZE, FONTWEIGHT } from "@/Constants";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/Providers/UserProvider";
+import { ArticlesContext } from "@/Providers/ArticleProvider";
 
 function MenuModal({ setIsShown }) {
   const { user, handleDisconnect } = useContext(UserContext);
+  const { currentArticle, handleDeleteArticle } = useContext(ArticlesContext);
 
   const router = useRouter();
 
@@ -19,6 +21,11 @@ function MenuModal({ setIsShown }) {
     router.push("CreateArticle");
   };
 
+  async function onDeleteArticle(event) {
+    event.preventDefault();
+    if (await handleDeleteArticle()) router.push("Home");
+  }
+
   return (
     <PageBackground>
       <Modal>
@@ -30,8 +37,10 @@ function MenuModal({ setIsShown }) {
             <MenuButton onClick={(e) => HandleAddArtcicleClick(e)}>
               ajouter un article
             </MenuButton>
-            <MenuButton>MODIFIER l`&aposarticle</MenuButton>
-            <MenuButton>SUPPRIMER l`&aposarticle</MenuButton>
+            <MenuButton>MODIFIER l'article</MenuButton>
+            <MenuButton onClick={(event) => onDeleteArticle(event)}>
+              SUPPRIMER l'article
+            </MenuButton>
           </ButtonsWrapper>
         )}
         <ButtonsWrapper style={{ flex: 2 }}>
