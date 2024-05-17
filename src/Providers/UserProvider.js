@@ -1,11 +1,16 @@
 import { notify } from "@/app/page";
 import {
   auth,
+  collection,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  db,
+  getDoc,
+  setDoc,
+  doc,
 } from "../Firebase";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export const UserContext = createContext();
 
@@ -19,6 +24,7 @@ export default function UserProvider({ children }) {
         // Signed up
         setUser(userCredential.user);
         setIsAuth(true);
+        handleCreateUserProfile(userCredential);
       })
       .catch((error) => {
         console.log(error);
@@ -72,9 +78,39 @@ export default function UserProvider({ children }) {
       });
   }
 
+  async function handleCreateUserProfile(userCredential) {
+    const ref = collection(db, "profiles");
+    await setDoc(ref, {
+      name: userCredential.user.email,
+      id: userCredential.user.uid,
+    });
+  }
+
+  async function handleFetchProfile(userId) {
+    try {
+      const ref = doc(db, "profiles", userId);
+      const docSnap = await getDoc(ref);
+      if (docSnap.exists()) {
+        const profile = {
+          ...docSnap.data(),
+        };
+        return profile;
+      }
+    } catch (e) {
+      // crashlytics
+    }
+  }
+
   return (
     <UserContext.Provider
-      value={{ user, isAuth, handleRegister, handleLogin, handleDisconnect }}
+      value={{
+        user,
+        isAuth,
+        handleRegister,
+        handleLogin,
+        handleDisconnect,
+        handleFetchProfile,
+      }}
     >
       {children}
     </UserContext.Provider>

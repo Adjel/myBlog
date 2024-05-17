@@ -158,15 +158,13 @@ Etape:
   - [v] fake
   - [v] fetch
 - [v] Supprimer un article
-- [x] Modifier un article
+- [v] Modifier un article
 - [x] author
 - [x] Footer
 - [x] CommentList
   - [x] ajouter un commentaire (form)
 - [x] commentItem
-
   - [x] supprimer un commentaire
-
 - [x] modifier un commentaire \*\*
 
 dependances:
