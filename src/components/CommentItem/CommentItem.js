@@ -1,10 +1,12 @@
 import React from "react";
 import { COLORS, FONTFAMILY, FONTSIZE, FONTWEIGHT } from "@/Constants";
 import styled from "styled-components";
+import DeleteCommentButton from "../DeleteCommentButton";
 
-function CommentItem({ auth, authorId, createdAt, content }) {
+function CommentItem({ auth, id, createdAt, content, authorId }) {
   return (
     <Section>
+      <DeleteCommentButton id={id} authorId={authorId} />
       <Auth>{auth}</Auth>
       <Date>{createdAt}</Date>
       <Content>{content}</Content>

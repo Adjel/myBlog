@@ -16,15 +16,17 @@ export default function CommentList() {
           <h1>{comments.length} commentaires</h1>
         )}
       </header>
-      {comments.map(({ auth, authorId, createdAt, content, id }) => (
+      {comments.map(({ auth, createdAt, content, authorId, id }) => (
         <>
           <Divider />
           <CommentItem
             key={id}
             auth={auth}
-            authorId={authorId}
             createdAt={new Date(createdAt).toLocaleDateString()}
             content={content}
+            onClickDelete={() => handleDelete(id)}
+            authorId={authorId}
+            id={id}
           />
         </>
       ))}
