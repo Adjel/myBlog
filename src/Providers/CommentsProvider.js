@@ -1,7 +1,17 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserProvider";
 import { ArticlesContext } from "./ArticleProvider";
-import { collection, onSnapshot, doc, getDoc, db, query } from "@/Firebase";
+import {
+  collection,
+  onSnapshot,
+  doc,
+  getDoc,
+  db,
+  query,
+  addDoc,
+  serverTimestamp,
+} from "@/Firebase";
+import { notify } from "@/app/page";
 
 export const CommentsContext = createContext();
 
@@ -85,8 +95,22 @@ export default function CommentsProvider({ children }) {
     }
   }
 
+  async function handleNewComment(content) {
+    if (user) {
+      const ref = collection(db, "articles", currentArticle.id, "comments");
+      const docRef = await addDoc(ref, {
+        content: content,
+        createdAt: serverTimestamp(),
+        authorId: user.uid,
+      });
+      console.log(docRef);
+    } else {
+      return notify("Vous devez vous connecter pour poster un commentaire");
+    }
+  }
+
   return (
-    <CommentsContext.Provider value={{ comments }}>
+    <CommentsContext.Provider value={{ comments, handleNewComment }}>
       {children}
     </CommentsContext.Provider>
   );
