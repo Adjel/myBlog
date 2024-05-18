@@ -164,7 +164,7 @@ Etape:
 - [v] CommentList
   - [v] ajouter un commentaire (form)
 - [v] commentItem
-  - [x] supprimer un commentaire
+  - [v] supprimer un commentaire
 - [x] modifier un commentaire \*\*
 
 dependances:
