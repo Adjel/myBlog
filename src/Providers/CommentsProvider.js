@@ -21,16 +21,22 @@ export default function CommentsProvider({ children }) {
 
   useEffect(() => {
     if (currentArticle) {
+      // Get comments
       const ref = collection(db, "articles", currentArticle.id, "comments");
       const q = query(ref);
+
+      // Get all comments from article
       const unsubscribe = onSnapshot(q, (querySnapshot) => {
         const articleComments = [];
         querySnapshot.forEach((doc) => {
+          // Set each comment
           articleComments.push({
             id: doc.id,
+            auth: getComAuth(doc.data().authorId),
             ...doc.data(),
           });
         });
+        console.log(articleComments);
         setComments(articleComments);
       });
       return () => {
@@ -38,6 +44,17 @@ export default function CommentsProvider({ children }) {
       };
     }
   });
+
+  async function getComAuth(authorId) {
+    // Get profile doc ref by comment authorId
+    const docRef = doc(db, "profiles", authorId);
+    await getDoc(docRef).then((docSnap) => {
+      if (docSnap.exists()) {
+        console.log(docSnap.data());
+        return docSnap.data().name;
+      }
+    });
+  }
 
   return (
     <CommentsContext.Provider value={{ comments }}>
