@@ -162,8 +162,8 @@ Etape:
 - [v] author
 - [v] Footer
 - [v] CommentList
-  - [x] ajouter un commentaire (form)
-- [x] commentItem
+  - [v] ajouter un commentaire (form)
+- [v] commentItem
   - [x] supprimer un commentaire
 - [x] modifier un commentaire \*\*
 

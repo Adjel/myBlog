@@ -10,6 +10,7 @@ import {
   query,
   addDoc,
   serverTimestamp,
+  deleteDoc,
 } from "@/Firebase";
 import { notify } from "@/app/page";
 
@@ -109,8 +110,29 @@ export default function CommentsProvider({ children }) {
     }
   }
 
+  async function handleDelete(id) {
+    if (!user)
+      return notify("Vous devez être connecté pour supprimer un article");
+    if (!currentArticle)
+      return notify("Impossible de supprimer un commentaire non défini");
+    if (!id)
+      return notify(
+        "Impossible de supprimer l'article car celui-ci n'existe pas"
+      );
+    try {
+      const ref = doc(db, "articles", currentArticle.id, "comments", id);
+      await deleteDoc(ref).then(() => {
+        notify("Le commentaire à bien été supprimé");
+      });
+    } catch (e) {
+      return notify(`L'erreur ${e} s'est produite`);
+    }
+  }
+
   return (
-    <CommentsContext.Provider value={{ comments, handleNewComment }}>
+    <CommentsContext.Provider
+      value={{ comments, handleNewComment, handleDelete }}
+    >
       {children}
     </CommentsContext.Provider>
   );
