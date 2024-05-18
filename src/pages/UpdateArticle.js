@@ -92,7 +92,7 @@ export default function UpdateArticle() {
   );
 }
 
-const ModifyArticleHeader = styled.header`
+const ModifyArticleHeader = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;

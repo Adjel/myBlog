@@ -20,13 +20,23 @@ function AuthorComponent() {
 
   return (
     <Section>
-      <Author>{author?.name}</Author>
+      <header>
+        <Author>{author?.name}</Author>
+      </header>
       <AuthorDesc>{author?.description}</AuthorDesc>
     </Section>
   );
 }
 
-const Author = styled.h3`
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  margin: 0;
+`;
+
+const Author = styled.h1`
   font-size: ${FONTSIZE.author};
   font-family: ${FONTFAMILY.lato};
   margin: 0;
@@ -35,14 +45,6 @@ const Author = styled.h3`
 const AuthorDesc = styled.p`
   font-size: ${FONTSIZE.parag};
   font-family: ${FONTFAMILY.lato};
-`;
-
-const Section = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-  margin: 0;
 `;
 
 export default AuthorComponent;

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { COLORS } from "@/Constants";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { CommentsContext } from "@/Providers/CommentsProvider";
 import CommentItem from "../CommentItem";
 

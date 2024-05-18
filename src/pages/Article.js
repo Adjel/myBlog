@@ -7,6 +7,7 @@ import AuthorComponent from "@/components/AuthorComponent";
 import CommentList from "@/components/CommentList";
 import HeaderComponent from "@/components/Header";
 import AddCommentForm from "@/components/AddCommentForm";
+import Footer from "@/components/Footer";
 
 export default function Article() {
   const router = useRouter();
@@ -37,6 +38,7 @@ export default function Article() {
           <AddCommentForm />
         </section>
       </PageWrapper>
+      <Footer />
     </>
   );
 }

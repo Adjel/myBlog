@@ -5,7 +5,6 @@ import { COLORS, FONTFAMILY, FONTSIZE, FONTWEIGHT } from "@/Constants";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/Providers/UserProvider";
 import { ArticlesContext } from "@/Providers/ArticleProvider";
-import { notify } from "@/app/page";
 
 function MenuModal({ setIsShown }) {
   const { user, handleDisconnect } = useContext(UserContext);

@@ -165,7 +165,7 @@ Etape:
   - [v] ajouter un commentaire (form)
 - [v] commentItem
   - [v] supprimer un commentaire
-- [x] modifier un commentaire \*\*
+- [v] modifier un commentaire \*\*
 
 dependances:
 react icon

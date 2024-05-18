@@ -37,8 +37,10 @@ function CommentItem({ auth, id, createdAt, content, authorId }) {
           <DeleteCommentButton id={id} authorId={authorId} />
         </ButtonsWrapper>
       )}
-      <Auth>{auth}</Auth>
-      <Date>{createdAt}</Date>
+      <header>
+        <Auth>{auth}</Auth>
+        <Date>{createdAt}</Date>
+      </header>
       {!isUpdating ? (
         <Content>{content}</Content>
       ) : (
@@ -75,7 +77,7 @@ const Section = styled.section`
   padding: ${1 / 16}rem 0;
 `;
 
-const ButtonsWrapper = styled.section`
+const ButtonsWrapper = styled.aside`
   display: flex;
   justify-content: end;
   width: 100%;

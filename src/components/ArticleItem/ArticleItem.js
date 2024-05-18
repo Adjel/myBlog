@@ -20,7 +20,7 @@ function ArticleItem({ createdAt, title, subtitle, id }) {
         <article>
           <Header>
             <H1>{title}</H1>
-            <Subtitle>{subtitle}</Subtitle>
+            <SubtitleH2>{subtitle}</SubtitleH2>
             <DateWrapper>{createdAt}</DateWrapper>
           </Header>
         </article>
@@ -53,19 +53,21 @@ const Header = styled.header`
 `;
 
 const H1 = styled.h1`
-  text-size: ${FONTSIZE.h1};
+  font-size: ${22 / 16}rem;
   text-align: center;
   padding: 0;
 `;
 
-const Subtitle = styled.p`
+const SubtitleH2 = styled.h2`
+  font-size: ${16 / 16}rem;
+  font-family: ${FONTFAMILY.lato};
+  font-weight: ${FONTWEIGHT.one};
+  text-align: start;
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
-  text-size: ${FONTSIZE.h2};
-  text-align: start;
 `;
 
 const DateWrapper = styled.div`
