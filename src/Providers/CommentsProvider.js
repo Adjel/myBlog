@@ -11,6 +11,7 @@ import {
   addDoc,
   serverTimestamp,
   deleteDoc,
+  updateDoc,
 } from "@/Firebase";
 import { notify } from "@/app/page";
 
@@ -99,12 +100,11 @@ export default function CommentsProvider({ children }) {
   async function handleNewComment(content) {
     if (user) {
       const ref = collection(db, "articles", currentArticle.id, "comments");
-      const docRef = await addDoc(ref, {
+      await addDoc(ref, {
         content: content,
         createdAt: serverTimestamp(),
         authorId: user.uid,
       });
-      console.log(docRef);
     } else {
       return notify("Vous devez vous connecter pour poster un commentaire");
     }
@@ -129,9 +129,31 @@ export default function CommentsProvider({ children }) {
     }
   }
 
+  async function handleUpdate(updatedContent, id) {
+    if (!currentArticle)
+      return notify(
+        "Modification impossible car le commentaire ou l'article n'est pas disponible"
+      );
+    if (!user)
+      return notify("Vous devez être connecté pour modifier un commentaire");
+    if (!id)
+      return notify(
+        "Impssible de modifier le commentaire car il n'existe pas ou plus"
+      );
+    const ref = doc(db, "articles", currentArticle.id, "comments", id);
+
+    try {
+      await updateDoc(ref, {
+        content: updatedContent,
+      });
+    } catch (e) {
+      notify(`L'erreur ${e} est survenue :/`);
+    }
+  }
+
   return (
     <CommentsContext.Provider
-      value={{ comments, handleNewComment, handleDelete }}
+      value={{ comments, handleNewComment, handleDelete, handleUpdate }}
     >
       {children}
     </CommentsContext.Provider>

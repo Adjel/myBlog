@@ -9,17 +9,18 @@ import { CommentsContext } from "@/Providers/CommentsProvider";
 function AddCommentForm() {
   const [comment, setComment] = useState();
 
-  const { comments, handleNewComment } = useContext(CommentsContext);
+  const { handleNewComment } = useContext(CommentsContext);
 
   const { user } = useContext(UserContext);
   const router = useRouter();
 
   function handleOnLogInClicked(event) {
     event.preventDefault();
-    router.push("Home");
+    router.push("Login");
   }
 
   function handleOncChange(event) {
+    event.preventDefault();
     if (!user)
       return notify("Vous devez vous connecter pour poster un commentaire");
     setComment(event.target.value);
@@ -46,21 +47,23 @@ function AddCommentForm() {
       </CreateArticleHeader>
       <BackgroundWrapper>
         <Form>
-          <Label htmlFor="content">ton commentaire:</Label>
-          <InputArea
-            type="text"
-            id="content"
-            name="content"
-            value={comment}
-            onChange={(event) => handleOncChange(event)}
-          ></InputArea>
           {user ? (
-            <SubmitButton
-              type="submit"
-              onClick={(event) => handleSubmit(event)}
-            >
-              POSTER LE COMMENTAIRE
-            </SubmitButton>
+            <>
+              <Label htmlFor="content">ton commentaire:</Label>
+              <InputArea
+                type="text"
+                id="content"
+                name="content"
+                value={comment}
+                onChange={(event) => handleOncChange(event)}
+              ></InputArea>
+              <SubmitButton
+                type="submit"
+                onClick={(event) => handleSubmit(event)}
+              >
+                POSTER LE COMMENTAIRE
+              </SubmitButton>
+            </>
           ) : (
             <SubmitButton onClick={handleOnLogInClicked}>
               SE CONNECTER
