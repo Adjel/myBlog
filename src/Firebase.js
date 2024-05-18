@@ -13,6 +13,7 @@ import {
   getDocs,
   where,
   setDoc,
+  query,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -57,6 +58,7 @@ export {
   getDocs,
   where,
   setDoc,
+  query,
 };
 
 export default app;

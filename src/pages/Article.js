@@ -1,4 +1,3 @@
-"use client";
 import styled from "styled-components";
 import { COLORS, FONTFAMILY, FONTSIZE, FONTWEIGHT } from "@/Constants";
 import { useRouter } from "next/router";

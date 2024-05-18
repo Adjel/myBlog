@@ -1,12 +1,12 @@
 import React from "react";
-import { FONTFAMILY, FONTSIZE, FONTWEIGHT } from "@/Constants";
+import { COLORS, FONTFAMILY, FONTSIZE, FONTWEIGHT } from "@/Constants";
 import styled from "styled-components";
 
 function CommentItem({ auth, authorId, createdAt, content }) {
   return (
     <Section>
       <Auth>{auth}</Auth>
-      <div>{createdAt}</div>
+      <Date>{createdAt}</Date>
       <Content>{content}</Content>
     </Section>
   );
@@ -19,15 +19,23 @@ const Section = styled.section`
   padding: ${36 / 16}rem 0;
 `;
 
-const Auth = styled.h2`
+const Date = styled.div`
   font-weight: ${FONTWEIGHT.one};
   font-family: ${FONTFAMILY.lato};
+  font-size: ${FONTSIZE.comments.content};
+  color: ${COLORS.primary};
+`;
+
+const Auth = styled.h2`
+  font-weight: ${FONTWEIGHT.three};
+  font-family: ${FONTFAMILY.lato};
+  font-size: ${FONTSIZE.comments.user};
 `;
 
 const Content = styled.p`
   font-weight: ${FONTWEIGHT.one};
   font-family: ${FONTFAMILY.lato};
-  font-size: ${FONTSIZE.comments};
+  font-size: ${FONTSIZE.comments.content};
 `;
 
 export default CommentItem;

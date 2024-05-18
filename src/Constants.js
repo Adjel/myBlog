@@ -51,7 +51,7 @@ export const FONTSIZE = {
   footer: `${14 / 16}rem`,
 
   comments: {
-    user: `${14.5 / 16}rem`,
+    user: `${15.5 / 16}rem`,
     content: `${13.5 / 16}rem`,
   },
 };
