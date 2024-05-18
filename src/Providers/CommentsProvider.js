@@ -9,6 +9,7 @@ import {
   getDoc,
   db,
 } from "@/Firebase";
+import { query } from "firebase/firestore";
 
 export const CommentsContext = createContext();
 
@@ -19,40 +20,24 @@ export default function CommentsProvider({ children }) {
   const { user } = useContext(UserContext);
 
   useEffect(() => {
-    let unsubscribe;
-
     if (currentArticle) {
-      fetchComments();
-    }
-
-    async function fetchComments() {
-      if (currentArticle) {
-        const ref = collection(db, "comments");
-        const docRef = doc(db, "profiles", currentArticle.userId);
-        const docSnap = await getDoc(docRef);
-        unsubscribe = onSnapshot(ref, (querySnapshot) => {
-          const allComments = [];
-          querySnapshot.forEach((doc) => {
-            if (docSnap.exists()) {
-              allComments.push({
-                id: doc.id,
-                ...doc.data(),
-                auth: docSnap.data().name,
-              });
-            }
+      const ref = collection(db, "articles", currentArticle.id, "comments");
+      const q = query(ref);
+      const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        const articleComments = [];
+        querySnapshot.forEach((doc) => {
+          articleComments.push({
+            id: doc.id,
+            ...doc.data(),
           });
-
-          setComments(allComments);
         });
-      }
-    }
-
-    return () => {
-      if (unsubscribe) {
+        setComments(articleComments);
+      });
+      return () => {
         unsubscribe();
-      }
-    };
-  }, [currentArticle]);
+      };
+    }
+  });
 
   return (
     <CommentsContext.Provider value={{ comments }}>
