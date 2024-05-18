@@ -6,6 +6,7 @@ import { ArticlesContext } from "@/Providers/ArticleProvider";
 import AuthorComponent from "@/components/AuthorComponent";
 import CommentList from "@/components/CommentList";
 import HeaderComponent from "@/components/Header";
+import AddCommentForm from "@/components/AddCommentForm";
 
 export default function Article() {
   const router = useRouter();
@@ -33,6 +34,7 @@ export default function Article() {
           <AuthorComponent />
           <Divider />
           <CommentList />
+          <AddCommentForm />
         </section>
       </PageWrapper>
     </>
