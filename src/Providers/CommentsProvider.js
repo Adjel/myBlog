@@ -1,15 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserProvider";
 import { ArticlesContext } from "./ArticleProvider";
-import {
-  QuerySnapshot,
-  collection,
-  onSnapshot,
-  doc,
-  getDoc,
-  db,
-} from "@/Firebase";
-import { query } from "firebase/firestore";
+import { collection, onSnapshot, doc, getDoc, db, query } from "@/Firebase";
 
 export const CommentsContext = createContext();
 
@@ -21,7 +13,7 @@ export default function CommentsProvider({ children }) {
 
   useEffect(() => {
     if (currentArticle) {
-      // Get comments
+      // Get all comments from the article ref
       const ref = collection(db, "articles", currentArticle.id, "comments");
       const q = query(ref);
 
@@ -32,28 +24,65 @@ export default function CommentsProvider({ children }) {
           // Set each comment
           articleComments.push({
             id: doc.id,
-            auth: getComAuth(doc.data().authorId),
             ...doc.data(),
           });
         });
-        console.log(articleComments);
-        setComments(articleComments);
+
+        // We have comments, but we need comments auth;
+        getComsWithAuth(articleComments);
       });
       return () => {
+        // Avoid memory leaks
         unsubscribe();
       };
     }
-  });
+  }, [currentArticle]);
 
-  async function getComAuth(authorId) {
-    // Get profile doc ref by comment authorId
-    const docRef = doc(db, "profiles", authorId);
-    await getDoc(docRef).then((docSnap) => {
-      if (docSnap.exists()) {
-        console.log(docSnap.data());
-        return docSnap.data().name;
-      }
+  async function getComsWithAuth(articleComments) {
+    // we will wait all promise ended before setting commentsWithAuth
+    const commentsWithAuth = await Promise.all(
+      // for each com, get the auth calling getComAuth in an asynchronous context/thread
+      articleComments.map(async (com) => {
+        // waiting for result from getComAuth
+        const name = await getComAuth(com);
+        return {
+          ...com,
+          auth: name,
+        };
+      })
+    );
+
+    setComments(commentsWithAuth);
+  }
+  /*
+  async function getComsWithAuth(articleComments) {
+    const commentsWithAuth = [];
+
+    // For each comment, we will fetch the auth
+    await articleComments.forEach((com) => {
+      // After retrieve auth, we set each comments and add auth name
+      getComAuth(com).then((name) => {
+        commentsWithAuth.push({
+          ...com,
+          auth: name,
+        });
+      });
     });
+    // Now we can set comments state with all data
+    setComments(commentsWithAuth);
+  }
+  */
+
+  // Return the auth for a com
+  async function getComAuth(com) {
+    const docRef = doc(db, "profiles", com.authorId);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return await docSnap.data().name;
+    } else {
+      // The have to never happen
+      console.log("this com don't have any auth");
+    }
   }
 
   return (

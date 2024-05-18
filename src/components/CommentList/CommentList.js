@@ -1,7 +1,7 @@
 import styled from "styled-components";
+import { COLORS } from "@/Constants";
 import { useContext, useEffect } from "react";
 import { CommentsContext } from "@/Providers/CommentsProvider";
-import { ArticlesContext } from "@/Providers/ArticleProvider";
 import CommentItem from "../CommentItem";
 
 export default function CommentList() {
@@ -9,13 +9,24 @@ export default function CommentList() {
 
   return (
     <Section>
+      <header>
+        {comments.length <= 1 ? (
+          <h1>{comments.length} commentaire</h1>
+        ) : (
+          <h1>{comments.length} commentaires</h1>
+        )}
+      </header>
       {comments.map(({ auth, authorId, createdAt, content, id }) => (
-        <CommentItem
-          auth={auth}
-          authorId={authorId}
-          createdAt={new Date(createdAt).toLocaleDateString()}
-          content={content}
-        />
+        <>
+          <Divider />
+          <CommentItem
+            key={id}
+            auth={auth}
+            authorId={authorId}
+            createdAt={new Date(createdAt).toLocaleDateString()}
+            content={content}
+          />
+        </>
       ))}
     </Section>
   );
@@ -24,4 +35,10 @@ export default function CommentList() {
 const Section = styled.section`
   display: grid;
   grid-template-columns: 1fr;
+  border: 2px sloid blue;
+`;
+
+const Divider = styled.hr`
+  border-top: 0.5px solid ${COLORS.Gray.lightGray};
+  width: 100%;
 `;
