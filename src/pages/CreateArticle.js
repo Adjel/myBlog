@@ -15,7 +15,7 @@ export default function CreatArticle() {
   });
 
   const { user } = useContext(UserContext);
-  const { handleNewArticle } = useContext(ArticlesContext);
+  const { articles, handleNewArticle } = useContext(ArticlesContext);
 
   const router = useRouter();
 
@@ -29,6 +29,14 @@ export default function CreatArticle() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    if (
+      articles.find(
+        (existingArticle) => existingArticle.title === article.title
+      )
+    )
+      return notify(
+        "Oups ! Il semble que ce titre d'article existe déjà, essaye un autre titre !"
+      );
     if (!user)
       return notify("Désolé, tu dois être connecté pour écrire un article");
     await handleNewArticle(article);
